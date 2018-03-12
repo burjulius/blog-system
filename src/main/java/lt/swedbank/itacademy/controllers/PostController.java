@@ -24,7 +24,7 @@ public class PostController {
     // manopuslapis.lt/
     // GET
     @RequestMapping(value = "/")
-    public List<Post> getAllPosts() {
+    public List<PostResponse> getAllPosts() {
         return service.getAllPosts();
     }
 

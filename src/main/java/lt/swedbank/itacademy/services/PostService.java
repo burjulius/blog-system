@@ -1,6 +1,7 @@
 package lt.swedbank.itacademy.services;
 
 import lt.swedbank.itacademy.beans.documents.Post;
+import lt.swedbank.itacademy.beans.response.PostResponse;
 import lt.swedbank.itacademy.repositories.PostRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -15,8 +17,10 @@ public class PostService {
     @Autowired
     private PostRepository repository;
 
-    public List<Post> getAllPosts() {
-        return repository.findAll();
+    public List<PostResponse> getAllPosts() {
+        return repository.findAll().stream()
+                .map(PostResponse::new)
+                .collect(Collectors.toList());
     }
 
     public Post addNewPost(@Valid Post post) {
